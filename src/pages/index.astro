@@ -1,0 +1,102 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FeaturedPost from '../components/FeaturedPost.astro';
+import NewsGrid from '../components/NewsGrid.astro';
+
+const latestPosts = await Astro.glob('./news/*.md');
+const sortedPosts = latestPosts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
+const featuredPost = sortedPosts[0];
+const recentPosts = sortedPosts.slice(1, 7);
+---
+
+<Layout title="Home">
+	<section class="hero">
+		<div class="hero-content">
+			<h1>DIGITAL GAMING <span class="highlight">REDEFINED</span></h1>
+			<div class="theorem">
+				<p class="theorem-title">Theorem 1.0</p>
+				<p class="theorem-content">For any given game G, there exists a perfect balance between innovation and enjoyment, where G approaches maximum player satisfaction.</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="latest-news">
+		<h2>LATEST_UPDATES <span class="blink">█</span></h2>
+		{featuredPost && <FeaturedPost post={featuredPost} />}
+		<NewsGrid posts={recentPosts} />
+	</section>
+</Layout>
+
+<style>
+	.hero {
+		text-align: left;
+		padding: 6rem 0;
+		position: relative;
+		margin: -2rem -2rem 2rem -2rem;
+	}
+
+	.hero-content {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	.hero h1 {
+		font-size: 4rem;
+		font-weight: 600;
+		margin-bottom: 2rem;
+		font-family: 'Space Grotesk', sans-serif;
+		line-height: 1;
+	}
+
+	.highlight {
+		color: var(--accent);
+	}
+
+	.theorem {
+		border: 2px solid var(--text);
+		padding: 2rem;
+		background: var(--card-bg);
+		max-width: 600px;
+		position: relative;
+	}
+
+	.theorem-title {
+		font-family: 'JetBrains Mono', monospace;
+		font-weight: 700;
+		margin-bottom: 1rem;
+	}
+
+	.theorem-content {
+		font-family: 'Space Grotesk', sans-serif;
+		line-height: 1.6;
+		color: var(--text-secondary);
+	}
+
+	.latest-news {
+		margin-top: 4rem;
+		position: relative;
+	}
+
+	.latest-news h2 {
+		font-size: 2rem;
+		font-weight: 600;
+		margin-bottom: 2rem;
+		font-family: 'JetBrains Mono', monospace;
+	}
+
+	.blink {
+		animation: blink 1s step-end infinite;
+		color: var(--accent);
+	}
+
+	@keyframes blink {
+		50% { opacity: 0; }
+	}
+
+	@media (max-width: 768px) {
+		.hero h1 {
+			font-size: 3rem;
+		}
+	}
+</style>

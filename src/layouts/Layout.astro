@@ -1,0 +1,161 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Thermes Game Publisher - Digital Gaming Redefined" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | Thermes</title>
+	</head>
+	<body>
+		<div class="grid-bg"></div>
+		<nav>
+			<div class="nav-content">
+				<a href="/" class="logo">
+					<img src="/images/hermes-helmet.png" alt="Thermes Logo" />
+					<span>THERMES_</span>
+				</a>
+				<div class="nav-links">
+					<a href="/games">GAMES</a>
+					<a href="/news">NEWS</a>
+					<a href="/about">ABOUT</a>
+				</div>
+			</div>
+		</nav>
+		<main>
+			<slot />
+		</main>
+		<footer>
+			<p>THERMES_{new Date().getFullYear()}</p>
+		</footer>
+	</body>
+</html>
+<style is:global>
+	:root {
+		--bg: #f4f1eb;
+		--grid: #e4e1db;
+		--accent: #ff6b6b;
+		--text: #2d2d2d;
+		--text-secondary: #666;
+		--card-bg: #ffffff;
+	}
+	
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	html {
+		font-family: 'Space Grotesk', monospace;
+		background: var(--bg);
+		color: var(--text);
+	}
+
+	body {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		position: relative;
+	}
+
+	.grid-bg {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-size: 2rem 2rem;
+		background-image: 
+			linear-gradient(to right, var(--grid) 1px, transparent 1px),
+			linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+		z-index: -1;
+		opacity: 0.4;
+	}
+
+	nav {
+		background: var(--card-bg);
+		padding: 1rem 0;
+		border-bottom: 2px solid var(--text);
+		position: relative;
+	}
+
+	.nav-content {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 2rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.logo {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		text-decoration: none;
+		color: var(--text);
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 1.5rem;
+		font-weight: 700;
+	}
+
+	.logo img {
+		height: 40px;
+		width: auto;
+	}
+
+	.nav-links {
+		display: flex;
+		gap: 2rem;
+		font-family: 'JetBrains Mono', monospace;
+	}
+
+	.nav-links a {
+		color: var(--text);
+		text-decoration: none;
+		font-size: 1rem;
+		transition: color 0.2s ease;
+		padding: 0.5rem 1rem;
+		border: 1px solid transparent;
+	}
+
+	.nav-links a:hover {
+		color: var(--accent);
+		border: 1px solid var(--text);
+	}
+
+	main {
+		flex: 1;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem;
+		width: 100%;
+		position: relative;
+	}
+
+	footer {
+		background: var(--card-bg);
+		padding: 2rem;
+		text-align: center;
+		color: var(--text);
+		border-top: 2px solid var(--text);
+		font-family: 'JetBrains Mono', monospace;
+	}
+
+	code {
+		font-family: 'JetBrains Mono', monospace;
+	}
+</style>

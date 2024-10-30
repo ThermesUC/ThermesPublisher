@@ -1,0 +1,84 @@
+---
+import Layout from './Layout.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title}>
+	<article class="blog-post">
+		{frontmatter.image && (
+			<img class="hero-image" src={frontmatter.image} alt={frontmatter.title} />
+		)}
+		<div class="content">
+			<span class="date">[ {new Date(frontmatter.date).toLocaleDateString()} ]</span>
+			<h1>{frontmatter.title}</h1>
+			<div class="post-content">
+				<slot />
+			</div>
+		</div>
+	</article>
+</Layout>
+
+<style>
+	.blog-post {
+		max-width: 800px;
+		margin: 0 auto;
+		background: var(--card-bg);
+		border: 2px solid var(--text);
+	}
+
+	.hero-image {
+		width: 100%;
+		height: 400px;
+		object-fit: cover;
+		border-bottom: 2px solid var(--text);
+	}
+
+	.content {
+		padding: 2rem;
+	}
+
+	.date {
+		display: block;
+		color: var(--text-secondary);
+		margin-bottom: 1rem;
+		font-family: 'JetBrains Mono', monospace;
+	}
+
+	h1 {
+		font-size: 2.5rem;
+		font-weight: 600;
+		margin-bottom: 2rem;
+		color: var(--text);
+		font-family: 'Space Grotesk', sans-serif;
+	}
+
+	.post-content {
+		line-height: 1.8;
+		color: var(--text);
+		font-family: 'Space Grotesk', sans-serif;
+	}
+
+	.post-content :global(h2) {
+		font-size: 1.8rem;
+		font-weight: 600;
+		margin: 2rem 0 1rem;
+		color: var(--text);
+		font-family: 'Space Grotesk', sans-serif;
+	}
+
+	.post-content :global(p) {
+		margin-bottom: 1.5rem;
+		color: var(--text-secondary);
+	}
+
+	.post-content :global(ul), .post-content :global(ol) {
+		margin: 1rem 0;
+		padding-left: 1.5rem;
+		color: var(--text-secondary);
+	}
+
+	.post-content :global(li) {
+		margin: 0.5rem 0;
+	}
+</style>

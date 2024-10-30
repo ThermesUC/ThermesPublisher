@@ -1,0 +1,75 @@
+---
+import Layout from '../layouts/Layout.astro';
+import GameCard from '../components/GameCard.astro';
+
+const games = [
+  {
+    title: "BulletHellGame",
+    status: "In Development",
+    description: "A mesmerizing bullet-hell experience where mathematical patterns meet chaos theory. Navigate through precisely calculated bullet patterns while uncovering the underlying beauty of computational complexity.",
+    image: "/images/bullethell-placeholder.jpg",
+    tags: ["Bullet Hell", "Mathematical", "Action"],
+    releaseWindow: "2024"
+  }
+];
+---
+
+<Layout title="Games">
+  <section class="games-header">
+    <h1>GAMES_<span class="blink">█</span></h1>
+    <div class="theorem">
+      <p class="theorem-title">Definition 2.1</p>
+      <p class="theorem-content">Let G be a game in development. The quality of G is directly proportional to the time spent iterating on core mechanics multiplied by player feedback.</p>
+    </div>
+  </section>
+
+  <section class="games-grid">
+    {games.map(game => <GameCard game={game} />)}
+  </section>
+</Layout>
+
+<style>
+  .games-header {
+    margin-bottom: 4rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .theorem {
+    border: 2px solid var(--text);
+    padding: 2rem;
+    background: var(--card-bg);
+    max-width: 600px;
+  }
+
+  .theorem-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .theorem-content {
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .blink {
+    animation: blink 1s step-end infinite;
+    color: var(--accent);
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .games-grid {
+    display: grid;
+    gap: 2rem;
+  }
+</style>

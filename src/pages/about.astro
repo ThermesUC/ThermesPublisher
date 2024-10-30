@@ -1,0 +1,173 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const team = [
+  {
+    role: "GAME_DESIGN",
+    description: "Crafting experiences at the intersection of mathematics and fun"
+  },
+  {
+    role: "DEVELOPMENT",
+    description: "Building robust systems with elegant solutions"
+  },
+  {
+    role: "COMMUNITY",
+    description: "Creating spaces for players to connect and grow"
+  }
+];
+---
+
+<Layout title="About">
+  <section class="about-header">
+    <h1>ABOUT_<span class="blink">█</span></h1>
+    <div class="theorem">
+      <p class="theorem-title">Axiom 4.1</p>
+      <p class="theorem-content">Great games emerge from the perfect synthesis of artistic vision and technical precision.</p>
+    </div>
+  </section>
+
+  <section class="about-content">
+    <div class="manifesto">
+      <h2>OUR_MANIFESTO</h2>
+      <div class="text-content">
+        <p>At Thermes, we approach game development as a mathematical art form. Each project is an equation waiting to be solved, a pattern seeking its perfect expression.</p>
+        <p>We believe in:</p>
+        <ul>
+          <li>Clean, precise game mechanics</li>
+          <li>Meaningful player choices</li>
+          <li>Innovation through iteration</li>
+          <li>Community-driven development</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="team-section">
+      <h2>THE_TEAM</h2>
+      <div class="team-grid">
+        {team.map(member => (
+          <div class="team-card">
+            <h3>{member.role}</h3>
+            <p>{member.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .about-header {
+    margin-bottom: 4rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .theorem {
+    border: 2px solid var(--text);
+    padding: 2rem;
+    background: var(--card-bg);
+    max-width: 600px;
+  }
+
+  .theorem-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .theorem-content {
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .blink {
+    animation: blink 1s step-end infinite;
+    color: var(--accent);
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .about-content {
+    display: grid;
+    gap: 4rem;
+  }
+
+  .manifesto, .team-section {
+    background: var(--card-bg);
+    border: 2px solid var(--text);
+    padding: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .text-content {
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .text-content p {
+    margin-bottom: 1.5rem;
+  }
+
+  .text-content ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .text-content li {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .text-content li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .team-card {
+    border: 1px solid var(--text);
+    padding: 1.5rem;
+  }
+
+  .team-card h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+  }
+
+  .team-card p {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .team-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

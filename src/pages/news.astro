@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NewsGrid from '../components/NewsGrid.astro';
+
+const posts = await Astro.glob('./news/*.md');
+const sortedPosts = posts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
+---
+
+<Layout title="News">
+  <section class="news-header">
+    <h1>NEWS_<span class="blink">█</span></h1>
+    <div class="theorem">
+      <p class="theorem-title">Lemma 3.1</p>
+      <p class="theorem-content">The frequency of meaningful updates correlates positively with community engagement and project momentum.</p>
+    </div>
+  </section>
+
+  <section class="news-content">
+    <NewsGrid posts={sortedPosts} />
+  </section>
+</Layout>
+
+<style>
+  .news-header {
+    margin-bottom: 4rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .theorem {
+    border: 2px solid var(--text);
+    padding: 2rem;
+    background: var(--card-bg);
+    max-width: 600px;
+  }
+
+  .theorem-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .theorem-content {
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .blink {
+    animation: blink 1s step-end infinite;
+    color: var(--accent);
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .news-content {
+    margin-top: 2rem;
+  }
+</style>
